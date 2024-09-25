@@ -1,0 +1,247 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #f7f7f7;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 0vh;
+}
+
+nav {
+    background: #FFD700;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    color: #2E3A8C;
+    border-bottom: 4px solid #2E3A8C;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#areaBusca {
+    padding: 20px;
+    text-align: center;
+    background: #ffffff;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+#inputBusca input {
+    width: 60%;
+    padding: 12px;
+    margin: 0 10px;
+    border-radius: 25px;
+    border: 2px solid #2E3A8C;
+    outline: none;
+    font-size: 16px;
+}
+
+#botoes button {
+    padding: 12px 25px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 25px;
+    background: #2E3A8C;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#botoes button:hover {
+    background: #1F2875;
+}
+
+#resposta {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 15px;
+    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#pokedex {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-height: 800px; 
+    overflow-y: auto; 
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px;
+}
+
+.minhaPokedex {
+    background: #FFD700;
+    border-radius: 10px;
+    padding: 8px;
+    text-align: center;
+    border: 2px solid #2E3A8C;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.minhaPokedex:hover {
+    transform: scale(1.05);
+}
+
+.minhaPokedex img {
+    max-width: 100px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+}
+
+.minhaPokedex p {
+    margin: 8px 0;
+    font-weight: bold;
+    color: #2E3A8C;
+}
+
+.listaHabilidades p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.btnEditar, .btnDeletar {
+    background: #2E3A8C;
+    border: none;
+    padding: 8px 15px;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.btnEditar:hover, .btnDeletar:hover {
+    background: #1F2875;
+}
+
+.pokemonsPokedex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: #ffffff;
+    border-radius: 10px;
+    border: 2px solid #2E3A8C;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 300px;
+}
+
+.pokemonsPokedex img {
+    max-width: 100px;
+    height: 80px;
+    margin-bottom: 10px;
+    border-radius: 10px; 
+}
+
+.nomeEtidar {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #2E3A8C;
+    border-radius: 25px;
+    outline: none;
+    text-align: center;
+    background: #ffffff;
+    font-size: 14px;
+    color: #333;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btnSalvar, .btnCancelar {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 25px;
+    background: #2E3A8C;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.1s ease-in-out;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.btnSalvar:hover, .btnCancelar:hover {
+    background: #1F2875;
+}
+
+.btnSalvar:active, .btnCancelar:active {
+    transform: scale(0.95); 
+}
+
+.pokemonInfo {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #2E3A8C;
+    text-align: center;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    width: 200px;
+}
+
+.pokemonInfo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.imgPokemon {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.pokemonInfo p {
+    margin: 5px 0;
+    font-weight: bold;
+    color: #2E3A8C;
+    font-size: 16px;
+}
+
+.listaHabilidades p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.btnCapturar {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.btnCapturar img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.2s ease;
+}
+
+.btnCapturar:hover img {
+    transform: scale(1.2);
+}

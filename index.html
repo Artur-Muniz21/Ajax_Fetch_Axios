@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>PokemonKrai</title>
+</head>
+<body>
+    <nav><h1>Monte sua pokedex boladona 😎</h1></nav>
+    <section>
+        <div id="areaBusca">
+            <div id="inputBusca"><input type="text" id="buscarPokemon" placeholder="Procure seu pokemon"></div>
+            <div id="botoes">
+                <button id="buscarFetch">Fetch</button>
+                <button id="buscarAjax">Ajax</button>
+                <button id="buscarAxios">Axios</button>
+            </div>
+            <div id="resposta"></div>
+        </div>
+        <div id="pokedex"></div>
+    </section>
+    <script src="fecth.js"></script>
+    <script type="module">
+
+        const resposta = document.getElementById('resposta');
+
+        async function axiosPokemon(nomePokemon) {
+            try {
+                const response = await axios.get("https://pokeapi.co/api/v2/pokemon?offset=0&limit=100000");
+                const results = response.data.results;
+            
+                const pokemonEncontrado = results.find(pokemon => pokemon.name === nomePokemon.toLowerCase());
+            
+                if (pokemonEncontrado) {
+                    await axiosPokemonEspecifico(pokemonEncontrado.url);
+                } else {
+                    resposta.innerHTML = '<p>Pokémon não encontrado. Verifique o nome e tente novamente.</p>';
+                }
+            } catch (error) {
+                resposta.innerHTML = '<p>Erro ao buscar Pokémon. Tente novamente mais tarde.</p>';
+            }
+        }
+
+
+        async function axiosPokemonEspecifico(url) {
+            try {
+                const response = await axios.get(url);
+                const data = response.data;
+                const id = data.id;
+                const habilidades = data.abilities;
+                const nome = data.species.name;
+                const nomeCapitalizado = nome.charAt(0).toUpperCase() + nome.slice(1);
+                const imagem = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${id}.gif`;
+                const tipo = data.types[0].type.name;
+
+                resposta.innerHTML = `
+                    <div class="pokemonInfo">
+                        <img class="imgPokemon" src="${imagem}" alt="${nome}">
+                        <p>${nomeCapitalizado}</p>
+                        <p>${tipo}</p>
+                        <div class="listaHabilidades"><p>Habilidades: <br></p></div>
+                        <button class="btnCapturar"><img src="pokeball-pokemon-svgrepo-com.svg"></button>
+                    </div>
+                `;
+
+                const btnCapturar = resposta.querySelector(".btnCapturar");  
+                const listaHabilidades = resposta.querySelector(".listaHabilidades");
+
+                habilidades.forEach(habilidade => {
+                    const habilidadeItem = document.createElement('p');
+                    habilidadeItem.textContent = habilidade.ability.name;
+                    listaHabilidades.appendChild(habilidadeItem);
+                });
+
+                btnCapturar.onclick = (event) => {
+                    event.preventDefault();
+                    capturar(nome, imagem, tipo);
+                };
+            } catch (error) {
+                resposta.innerHTML = '<p>Erro ao buscar detalhes do Pokémon. Tente novamente mais tarde.</p>';
+            }
+        }
+
+        async function capturar(nome, imagem, tipo) {
+            await fetch("http://localhost:3000/pokedex", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"  },
+                body: JSON.stringify({
+                  nome: nome,
+                  imagem: imagem,
+                  tipo: tipo
+                })
+            });
+        }
+
+        document.getElementById('buscarAxios').onclick = () => {
+            const nomePokemon = document.getElementById('buscarPokemon').value.toLowerCase();
+            axiosPokemon(nomePokemon);
+        };
+    </script>
+</body>
+</html>
+
